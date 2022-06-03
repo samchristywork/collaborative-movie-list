@@ -1,0 +1,36 @@
+body {
+  background-image: url('background.jpg');
+  background-size: cover;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 10em;
+  margin-top: 10em;
+}
+
+.container {
+  background-color: rgba(255,255,255,.7);
+  border-radius: .25em;
+  margin: auto;
+  padding: 1em;
+  width: 20em;
+}
+
+.title {
+  color: white;
+  text-align: center;
+}
+
+.list-item {
+  font-size: 1.25em;
+}
+
+.list-item:hover {
+  background-color: rgba(255,255,255,.4);
+}
+
+.button {
+  text-align: center;
+}
+
+.button:hover {
+  background-color: rgba(255,255,255,.4);
+}
