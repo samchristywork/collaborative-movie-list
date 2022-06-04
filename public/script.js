@@ -1,8 +1,10 @@
 const movieList = document.querySelector('#movie-list')
 
+let prefix="/collaborative-movie-list/";
+
 // Repopulate the movie list with an up to date version.
 function refresh () {
-  fetch('/movies.json')
+  fetch(prefix + 'movies.json')
     .then(x => x.json())
     .then(y => {
       y.list.sort((a, b) => {
@@ -18,7 +20,7 @@ function refresh () {
         }
         d.onclick = e => {
           console.log(movie)
-          fetch(`/watched?movie=${movie.name}`)
+          fetch(prefix + `watched?movie=${movie.name}`)
             .then(x => x.text())
             .then(y => {
               refresh()
@@ -34,7 +36,7 @@ function addMovie () {
   if (confirm('Would you like to add a movie?')) {
     const movie = prompt('What movie do you want to add?')
     console.log(movie)
-    fetch(`/add_movie?movie=${movie}`)
+    fetch(prefix + `add_movie?movie=${movie}`)
       .then(x => x.text())
       .then(y => {
         refresh()

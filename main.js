@@ -3,6 +3,8 @@ const morgan = require('morgan')
 const fs = require('fs')
 const app = express()
 
+let prefix="/collaborative-movie-list/";
+
 /*
  * Placeholder data. Each element in this array has a name and a boolean flag
  * signaling whether it has been watched. This is the main state holder of the
@@ -29,7 +31,7 @@ app.use(morgan('dev'))
  * Create a static route. Everything in the 'public' directory will be sent
  * as-is. That includes the index, CSS styling, script files, and images.
  */
-app.use(express.static('public'))
+app.use(prefix, express.static('public'))
 
 /*
  * This route takes a movie name and adds it to the list with the 'watched'
@@ -39,7 +41,7 @@ app.use(express.static('public'))
  *
  * Returns '200' if the insertion was successful, otherwise '400'.
  */
-app.get('/add_movie', function (req, res) {
+app.get(prefix + 'add_movie', function (req, res) {
   if (req.query.movie && typeof (req.query.movie === 'string')) {
     movieList.list.push({ name: req.query.movie, watched: false })
     res.sendStatus(200)
@@ -57,7 +59,7 @@ app.get('/add_movie', function (req, res) {
  *
  * Returns '200' if the user supplied a valid movie name, otherwise '400'.
  */
-app.get('/delete', function (req, res) {
+app.get(prefix + 'delete', function (req, res) {
   if (req.ip === '::ffff:127.0.0.1') {
     if (req.query.movie && typeof (req.query.movie === 'string')) {
       movieList.list = movieList.list.filter(e => {
@@ -78,7 +80,7 @@ app.get('/delete', function (req, res) {
  * Returns '200' if the user supplied a valid movie name, and it was in the
  * list, otherwise '400'.
  */
-app.get('/watched', function (req, res) {
+app.get(prefix + 'watched', function (req, res) {
   if (req.query.movie && typeof (req.query.movie === 'string')) {
     for (const movie of movieList.list) {
       if (movie.name === req.query.movie) {
@@ -99,9 +101,9 @@ app.get('/watched', function (req, res) {
  * Returns '200' if the user supplied a valid movie name, and it was in the
  * list, otherwise '400'.
  */
-app.get('/movies.json', function (req, res) {
+app.get(prefix + 'movies.json', function (req, res) {
   res.json(movieList)
 })
 
-app.listen(8080)
-console.log('Listening on port 8080...')
+app.listen(8082)
+console.log('Listening on port 8082...')
