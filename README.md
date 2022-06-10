@@ -1,3 +1,5 @@
+![Banner](https://s-christy.com/status-banner-service/collaborative-movie-list/banner-slim.svg)
+
 ## Overview
 
 This is a simple web app that will allow my SO and me to keep and collaborate
@@ -38,3 +40,9 @@ npm
 ## Credits
 
 Photo by [Alessia C_Jpg](https://unsplash.com/photos/cGNVTBcP7vY)
+
+## License
+
+This work is licensed under the GNU General Public License version 3 (GPLv3).
+
+[<img src="https://s-christy.com/status-banner-service/GPLv3_Logo.svg" width="150" />](https://www.gnu.org/licenses/gpl-3.0.en.html)
