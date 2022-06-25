@@ -37,11 +37,11 @@ app.use(prefix, express.static('public'))
  * This route takes a movie name and adds it to the list with the 'watched'
  * flag set to 'false'.
  *
- * ex: '/add_movie?movie=Terminator%202' will add "Terminator 2" to the list.
+ * ex: '/add?movie=Terminator%202' will add "Terminator 2" to the list.
  *
  * Returns '200' if the insertion was successful, otherwise '400'.
  */
-app.get(prefix + 'add_movie', function (req, res) {
+app.get(prefix + 'add', function (req, res) {
   if (req.query.movie && typeof (req.query.movie === 'string')) {
     movieList.list.push({ name: req.query.movie, watched: false })
     res.sendStatus(200)
@@ -73,14 +73,14 @@ app.get(prefix + 'delete', function (req, res) {
 })
 
 /*
- * This route takes a movie name and toggles its 'watched' flag.
+ * This route takes a movie name and toggles its 'toggle' flag.
  *
- * ex: '/watched?movie=Terminator%202'
+ * ex: '/toggle?movie=Terminator%202'
  *
  * Returns '200' if the user supplied a valid movie name, and it was in the
  * list, otherwise '400'.
  */
-app.get(prefix + 'watched', function (req, res) {
+app.get(prefix + 'toggle', function (req, res) {
   if (req.query.movie && typeof (req.query.movie === 'string')) {
     for (const movie of movieList.list) {
       if (movie.name === req.query.movie) {
@@ -96,12 +96,12 @@ app.get(prefix + 'watched', function (req, res) {
 /*
  * This route simply returns the movie list.
  *
- * ex: '/movies.json'
+ * ex: '/list'
  *
  * Returns '200' if the user supplied a valid movie name, and it was in the
  * list, otherwise '400'.
  */
-app.get(prefix + 'movies.json', function (req, res) {
+app.get(prefix + 'list', function (req, res) {
   res.json(movieList)
 })
 
