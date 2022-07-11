@@ -34,10 +34,10 @@ app.use(morgan('dev'))
 app.use(prefix, express.static('public'))
 
 /*
- * This route takes a movie name and adds it to the list with the 'watched'
- * flag set to 'false'.
+ * This route takes an item and adds it to the list with the 'tagged' flag set
+ * to 'false'.
  *
- * ex: '/add?movie=Terminator%202' will add "Terminator 2" to the list.
+ * ex: '/add?list=movies&name=Terminator%202' will add "Terminator 2" to the list.
  *
  * Returns '200' if the insertion was successful, otherwise '400'.
  */
@@ -54,11 +54,11 @@ app.get(prefix + 'add', function (req, res) {
 })
 
 /*
- * This route takes a movie name and removes it from the list if it exists.
+ * This route takes an item and removes it from the list if it exists.
  * Note that this route can only be accessed from localhost, and does not have
  * a UI control. For administration only.
  *
- * ex: '/delete?movie=Terminator%202' will delete "Terminator 2" from the list.
+ * ex: '/delete?list=movies&name=Terminator%202' will delete "Terminator 2" from the list.
  *
  * Returns '200' if the user supplied a valid movie name, otherwise '400'.
  */
@@ -79,12 +79,12 @@ app.get(prefix + 'delete', function (req, res) {
 })
 
 /*
- * This route takes a movie name and toggles its 'toggle' flag.
+ * This route takes an item name and toggles its 'toggle' flag.
  *
- * ex: '/toggle?movie=Terminator%202'
+ * ex: '/toggle?list=movies&name=Terminator%202'
  *
- * Returns '200' if the user supplied a valid movie name, and it was in the
- * list, otherwise '400'.
+ * Returns '200' if the user supplied a valid name, and it was in the list,
+ * otherwise '400'.
  */
 app.get(prefix + 'toggle', function (req, res) {
   if (req.query.list && typeof (req.query.list === 'string')) {
@@ -106,7 +106,7 @@ app.get(prefix + 'toggle', function (req, res) {
 /*
  * This route simply returns the movie list.
  *
- * ex: '/list'
+ * ex: '/list?list=movies'
  *
  * Returns '200' if the user supplied a valid movie name, and it was in the
  * list, otherwise '400'.
