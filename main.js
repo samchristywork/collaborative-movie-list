@@ -10,11 +10,11 @@ let prefix="/collaborative-movie-list/";
  * signaling whether it has been watched. This is the main state holder of the
  * server.
  */
-const movieList = {
-  list: [
-    { name: 'Movie A', watched: false },
-    { name: 'Movie B', watched: true },
-    { name: 'Movie C', watched: false }
+const lists = {
+  movies: [
+    { name: 'Movie A', tagged: false },
+    { name: 'Movie B', tagged: true },
+    { name: 'Movie C', tagged: false }
   ]
 }
 
@@ -42,12 +42,15 @@ app.use(prefix, express.static('public'))
  * Returns '200' if the insertion was successful, otherwise '400'.
  */
 app.get(prefix + 'add', function (req, res) {
-  if (req.query.movie && typeof (req.query.movie === 'string')) {
-    movieList.list.push({ name: req.query.movie, watched: false })
-    res.sendStatus(200)
-  } else {
-    res.sendStatus(400)
+  if (req.query.list && typeof (req.query.list === 'string')) {
+    if (req.query.name && typeof (req.query.name === 'string')) {
+      lists[req.query.list].push({ name: req.query.name, tagged: false })
+      res.sendStatus(200)
+      return
+    }
   }
+  res.sendStatus(400)
+  return
 })
 
 /*
@@ -61,15 +64,18 @@ app.get(prefix + 'add', function (req, res) {
  */
 app.get(prefix + 'delete', function (req, res) {
   if (req.ip === '::ffff:127.0.0.1') {
-    if (req.query.movie && typeof (req.query.movie === 'string')) {
-      movieList.list = movieList.list.filter(e => {
-        return e.name !== req.query.movie
-      })
-      res.sendStatus(200)
-      return
+    if (req.query.list && typeof (req.query.list === 'string')) {
+      if (req.query.name && typeof (req.query.name === 'string')) {
+        list[req.query.list] = movieList.list.filter(e => {
+          return e.name !== req.query.name
+        })
+        res.sendStatus(200)
+        return
+      }
     }
   }
   res.sendStatus(400)
+  return
 })
 
 /*
@@ -81,12 +87,16 @@ app.get(prefix + 'delete', function (req, res) {
  * list, otherwise '400'.
  */
 app.get(prefix + 'toggle', function (req, res) {
-  if (req.query.movie && typeof (req.query.movie === 'string')) {
-    for (const movie of movieList.list) {
-      if (movie.name === req.query.movie) {
-        movie.watched = !movie.watched
-        res.sendStatus(200)
-        return
+  if (req.query.list && typeof (req.query.list === 'string')) {
+    if (req.query.name && typeof (req.query.name === 'string')) {
+      for (const item of lists[req.query.list]) {
+        console.log(req.query.name, item.name)
+        if (item.name == req.query.name) {
+          console.log("HERE")
+          item.tagged = !item.tagged
+          res.sendStatus(200)
+          return
+        }
       }
     }
   }
@@ -102,7 +112,11 @@ app.get(prefix + 'toggle', function (req, res) {
  * list, otherwise '400'.
  */
 app.get(prefix + 'list', function (req, res) {
-  res.json(movieList)
+  if (req.query.list && typeof (req.query.list === 'string')) {
+    res.json(lists[req.query.list])
+    return
+  }
+  res.sendStatus(400)
 })
 
 app.listen(8082)
