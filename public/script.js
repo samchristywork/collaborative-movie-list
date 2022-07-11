@@ -1,8 +1,8 @@
-const movieList = document.querySelector('#movie-list')
+const list = document.querySelector('#list')
 
 let prefix="/collaborative-movie-list/";
 
-// Repopulate the movie list with an up to date version.
+// Repopulate the list with an up to date version.
 function refresh () {
   fetch(prefix + 'list?list=movies')
     .then(x => x.json())
@@ -10,33 +10,32 @@ function refresh () {
       y.sort((a, b) => {
         return a.name > b.name
       })
-      movieList.innerHTML = ''
-      for (const movie of y) {
+      list.innerHTML = ''
+      for (const item of y) {
         const d = document.createElement('div')
-        d.innerText = movie.name
+        d.innerText = item.name
         d.classList = 'list-item'
-        if (movie.tagged) {
+        if (item.tagged) {
           d.style.textDecoration = 'line-through'
         }
         d.onclick = e => {
-          console.log(movie)
-          fetch(prefix + `toggle?list=movies&name=${movie.name}`)
+          console.log(item)
+          fetch(prefix + `toggle?list=movies&name=${item.name}`)
             .then(x => x.text())
             .then(y => {
               refresh()
             })
         }
-        movieList.appendChild(d)
+        list.appendChild(d)
       }
     })
 }
 
-// Add a movie to the list.
-function addMovie () {
-  if (confirm('Would you like to add a movie?')) {
-    const movie = prompt('What movie do you want to add?')
-    console.log(movie)
-    fetch(prefix + `add?list=movies&name=${movie}`)
+// Add an item to the list.
+function addItem () {
+  if (confirm('Would you like to add a item?')) {
+    const item = prompt('What item do you want to add?')
+    fetch(prefix + `add?list=movies&name=${item}`)
       .then(x => x.text())
       .then(y => {
         refresh()
