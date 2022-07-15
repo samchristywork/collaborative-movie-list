@@ -119,5 +119,12 @@ app.get(prefix + 'list', function (req, res) {
   res.sendStatus(400)
 })
 
+/*
+ * Redirect all traffic from root to the path specified by the prefix.
+ */
+app.get('/', function (req, res) {
+  res.redirect(prefix);
+})
+
 app.listen(8082)
 console.log('Listening on port 8082...')
