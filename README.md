@@ -9,11 +9,6 @@ When it is running, uses can add new movies to the list by clicking the "Add
 Movie" button, and toggle a strikethrough line by clicking on the item in
 question.
 
-## Demo
-
-A live demo is available at
-[s-christy.com/collaborative-movie-list/](https://s-christy.com/collaborative-movie-list/)
-
 ## Setup
 
 To run this server you first need to install all of the dependencies:
