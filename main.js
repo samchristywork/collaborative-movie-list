@@ -45,6 +45,13 @@ app.get(prefix + 'add', function (req, res) {
   if (req.query.list && typeof (req.query.list === 'string')) {
     if (req.query.name && typeof (req.query.name === 'string')) {
       lists[req.query.list].push({ name: req.query.name, tagged: false })
+
+      fs.writeFile("backup.json", JSON.stringify(lists), function(err) {
+          if(err) {
+              console.log(err);
+          }
+      })
+
       res.sendStatus(200)
       return
     }
