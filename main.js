@@ -134,4 +134,4 @@ app.get('/', function (req, res) {
 })
 
 app.listen(8082)
-console.log('Listening on port 8082...')
+console.log(`Listening on port 8082... (${prefix})`)
