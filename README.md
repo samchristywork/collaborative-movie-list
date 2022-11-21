@@ -9,6 +9,15 @@ When it is running, uses can add new movies to the list by clicking the "Add
 Movie" button, and toggle a strikethrough line by clicking on the item in
 question.
 
+## Features
+
+- Web app for creating a list of movies
+- Simple user interface
+- Movies can be toggled between watched and not watched
+- Immutable list (items can be deleted from `localhost` only)
+- Logging with `morgan` middleware
+- Designed to be hosted behind Nginx or Apache proxy
+
 ## Setup
 
 To run this server you first need to install all of the dependencies:
