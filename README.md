@@ -1,9 +1,9 @@
-![Banner](https://s-christy.com/status-banner-service/collaborative-movie-list/banner-slim.svg)
+![Banner](https://s-christy.com/sbs/status-banner.svg?icon=av/movie&hue=50&title=Movie%20List&description=A%20web%20application%20for%20keeping%20track%20of%20movies%20to%20watch)
 
 ## Overview
 
-This is a simple web app that will allow my SO and me to keep and collaborate
-on a list of movies to watch. It will run on a VPS behind an Nginx proxy.
+This is a simple web app that allows my wife and me to keep and collaborate on
+a list of movies to watch. It runs on a VPS behind an Nginx proxy.
 
 When it is running, uses can add new movies to the list by clicking the "Add
 Movie" button, and toggle a strikethrough line by clicking on the item in
