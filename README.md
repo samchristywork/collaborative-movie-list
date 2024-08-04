@@ -2,6 +2,10 @@
 
 ## Overview
 
+<p align="center">
+  <img src="./assets/screenshot.png" width=500 />
+</p>
+
 This is a simple web app that allows my wife and me to keep and collaborate on
 a list of movies to watch. It runs on a VPS behind an Nginx proxy.
 
